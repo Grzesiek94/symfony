@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"/>
 </head>
     <body>
         <div class="container">
@@ -17,6 +18,30 @@
             {% javascripts '@jquery' '@bootstrap_js' %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+            <script>
+          $( document ).ready(function(){
+            $( document ).on('click', '.deletable', function(e){
+              e.preventDefault();
+              var button = $(this);
+              swal({
+                title: "Jesteś pewien?",
+                text: "Usuniętego obiektu nie będzie można przywrócić! ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Tak, jestem pewien",
+                cancelButtonText: "Anuluj",
+                closeOnConfirm: true,
+                closeOnCancel: true
+              }, function(c){
+                if(c) {
+                  document.location = button.data('href');
+                }
+              });
+            });
+          });
+        </script>
         {% endblock %}
     </body>
 </html>

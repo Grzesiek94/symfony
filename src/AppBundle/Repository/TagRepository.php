@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Tag;
 
 /**
  * TagRepository
@@ -23,4 +24,26 @@ class TagRepository extends EntityRepository
         ->select('t')
         ->from('AppBundle:Tag', 't');
    }
+
+   /**
+     * Save entity.
+     *
+     * @param Tag $tag Tag entity
+     */
+    public function save(Tag $tag)
+    {
+        $this->_em->persist($tag);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Tag $tag Tag entity
+     */
+    public function delete(Tag $tag)
+    {
+        $this->_em->remove($tag);
+        $this->_em->flush();
+    }
 }
